@@ -6,21 +6,23 @@
 """
 
 N, M = map(int, input().split())
+J = int(input())  # 사과 개수
 
-J = int(input())
-current = 1
+basket = 1  # 바구니 현 위치
 result = 0
 
 for i in range(J):
-    a = int(input())
+    apple = int(input())
 
-    if current <= a <= current + M - 1:
+    if basket <= apple <= basket + M - 1:  # 바구니 안에 사과가 위치 (이동 x)
         continue
-    elif a < current:
-        result += current - a
-        current -= current - a
-    else:
-        result += a - (current + M - 1)
-        current += a - (current + M - 1)
+
+    elif basket < apple:  # 바구니보다 오른쪽에 사과가 위치
+        result += apple - (basket + M - 1)
+        basket += apple - (basket + M - 1)
+
+    else:  # 바구니보다 왼쪽에 사과가 위치
+        result += basket - apple
+        basket -= basket - apple
 
 print(result)
